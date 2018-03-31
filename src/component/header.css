@@ -1,0 +1,36 @@
+#components-layout-demo-top .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, .2);
+    margin: 16px 0 0 0;
+    float: left;
+}
+
+.header {
+    height: 65px;
+    margin-top: 1%;
+    border-bottom:1px solid rgba(228, 232, 78, 0.33);
+
+}
+
+.flex-box {
+    margin-left: 5%;
+
+    margin-right: 40%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.logo {
+    height: 60px;
+    line-height: 60px;
+    color: #fff;
+    font-size: large;
+    background-color: #cfd3a6;
+}
+
+.dropdown {
+    height: 60px;
+    line-height: 60px;
+}

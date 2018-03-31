@@ -1,0 +1,22 @@
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.content .content-table{
+    width: 48%;
+}
+.content .content-textArea{
+    width: 48%;
+}
+.content .content-textArea .content-textArea-input{
+    height: 500px;
+}
+.content .content-table .content-table-show{
+    max-height: 500px;
+
+}
+
+.title{
+    margin-bottom: 2px;
+}
