@@ -12,41 +12,41 @@ const tokenListColumns = [{
     className: 'column-money',
     dataIndex: 'str',
 }, {
-    title: '机器码',
+    title: '类型',
     dataIndex: 'opcodes',
 }];
 const characterListColumns = [{
-    title: 'Name',
-    dataIndex: 'name',
+    title: '行',
+    dataIndex: 'row',
     render: text => <a href="#">{text}</a>,
 }, {
-    title: 'Cash Assets',
+    title: '字符',
     className: 'column-money',
-    dataIndex: 'money',
+    dataIndex: 'str',
 }, {
-    title: 'Address',
-    dataIndex: 'address',
+    title: '类型',
+    dataIndex: 'opcodes',
 }];
 const errorListColumns = [{
-    title: 'Name',
-    dataIndex: 'name',
+    title: '行',
+    dataIndex: 'row',
     render: text => <a href="#">{text}</a>,
 }, {
-    title: 'Cash Assets',
+    title: '字符',
     className: 'column-money',
-    dataIndex: 'money',
+    dataIndex: 'str',
 }, {
-    title: 'Address',
-    dataIndex: 'address',
+    title: '类型',
+    dataIndex: 'opcodes',
 }];
 class Content extends Component {
     render() {
         return (
             <div className="content">
                 <InputBox fileValue = {this.props.fileValue}/>
+                <CharacterTable charList = {this.props.charList}/>
                 <TokenTable tokenList = {this.props.tokenList}/>
-                <CharacterTable />
-                <ErrorTable/>
+                <ErrorTable errorList = {this.props.errorList}/>
             </div>
         )
     }
@@ -88,7 +88,7 @@ class CharacterTable extends Component {
                 <Tag color="#2db7f5" className="title">字符</Tag>
                 <Table columns={characterListColumns}
                        bordered
-
+                       dataSource={this.props.charList}
                        className="content-table-show"/>
             </div>
         )
@@ -102,6 +102,7 @@ class ErrorTable extends Component {
                 <Tag color="#2db7f5" className="title">ErrorList</Tag>
                 <Table columns={errorListColumns}
                        bordered
+                       dataSource={this.props.errorList}
                        className="content-table-show"/>
             </div>
         )

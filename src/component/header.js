@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
-import {Menu, Dropdown, Icon, Tag,  message,} from 'antd';
+import {Menu, Dropdown, Icon, Tag, message,} from 'antd';
 import './header.css'
 import Analyze from '../server/server'
 
@@ -31,7 +31,7 @@ class AHeader extends Component {
     }
 
     fileImport(e) {
-        try{
+        try {
             var _this = this;
             let fileDom = ReactDom.findDOMNode(this.refs["fileRead"])
             //获取读取我文件的File对象
@@ -47,69 +47,34 @@ class AHeader extends Component {
             }
             message.success("打开文件成功")
         }
-        catch (e){
+        catch (e) {
             message.error("打开文件出现问题")
         }
 
     }
+
     analyze() {
         var _this = this;
         // 关键字
-        const keyWords = ["int", "long", "char", "if", "else", "for", "while", "return", "break", "continue", "switch", "case", "default", "float", "double", "void", "struct", "static", "do", "short"]
-        // 运算符
-        const operator = ["+", "-", "*", "/", "%", "=", ">", "<", "!", "==", "!=", ">=", "<=", "++", "--", "&", "&&", "||", "[", "]"]
-        // 分界符
-        const delimiter = [",", ";", "(", ")", "{", "}", "'", "\"", ":", "#"]
-        Analyze.prototype.init(this.state.readFileValue, keyWords, operator, delimiter)
-        let errors = [];
-        let errorNum = 0;
-        let values = [];
-        try {
-            (function doTocken(erros, errorNum, values) {
-                let ts = Analyze.prototype.preFunction();
-                let wlist = Analyze.prototype.divide(ts);
-                let opcodes = -1;
-                let str;
-                let i;
-                while (wlist.length > 0) {
-                    let word = wlist.shift();
-                    str = word.word;
-                    i = Analyze.prototype.check(str);
-                    switch (i) {
-                        case 1:
-                            opcodes = Analyze.prototype.checkDigit(str);
-                            break;
-                        case 2:
-                            opcodes = Analyze.prototype.checkChar(str);
-                            break;
-                        case 3:
-                            opcodes = Analyze.prototype.checkString(str);
-                            break;
-                        default:
-                            throw "(header.js line:66)处发生了错误"
-                    }
 
-                    if (opcodes === 0) {
-                        errors.push({
-                            row: word.row,
-                            str: str
-                        })
-                        errorNum++;
-                    }
-                    values.push({
-                        row: word.row,
-                        str: str,
-                        opcodes: opcodes
-                    })
-                    // count++;
-                }
-            })(errors, errorNum, values)
-            _this.props.changeTokenList(values)
+        Analyze.prototype.init(this.state.readFileValue)
+        let tokenList = [];
+        let charList = [];
+        let errorList = [];
+        try {
+            Analyze.prototype.scannerAll();
+            tokenList = Analyze.prototype.tokenList;
+            charList = Analyze.prototype.charList;
+            errorList = Analyze.prototype.errorList;
+            _this.props.changeTokenList(tokenList)
+            _this.props.changeCharList(charList)
+            _this.props.changeErrorList(errorList)
             message.success("词法分析完成.")
         } catch (e) {
             message.error("词法分析过程中发生了错误.")
         }
     }
+
     render() {
         return (
             <div className="header">
@@ -136,10 +101,10 @@ class AHeader extends Component {
                             文件 <Icon type="down"/>
                         </a>
                     </Dropdown>
-                    <Dropdown overlay= {
+                    <Dropdown overlay={
                         <Menu>
                             <Menu.Item>
-                                <span onClick= {this.analyze.bind(this)}>手工生成过程演示</span>
+                                <span onClick={this.analyze.bind(this)}>手工生成过程演示</span>
                             </Menu.Item>
                             <Menu.Item>
                                 <span>自动生成算法演示</span>
