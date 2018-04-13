@@ -40,10 +40,13 @@ const errorListColumns = [{
     dataIndex: 'opcodes',
 }];
 class Content extends Component {
+
+
     render() {
+        this.props.errorList.pop()
         return (
             <div className="content">
-                <InputBox fileValue = {this.props.fileValue}/>
+                <InputBox fileValue = {this.props.fileValue} changeFileValue={this.props.changeFileValue}/>
                 <CharacterTable charList = {this.props.charList}/>
                 <TokenTable tokenList = {this.props.tokenList}/>
                 <ErrorTable errorList = {this.props.errorList}/>
@@ -53,14 +56,24 @@ class Content extends Component {
 }
 
 class InputBox extends Component {
-    constructor(){
-        super()
+    constructor(props) {
+        super(props)
+        this.state = {
+            readFileValue: this.props.fileValue
+        }
+    }
+    setState_ = (e) => {
+        this.setState({
+                readFileValue : e.target.value
+            }
+        )
+        this.props.changeFileValue(e.target.value)
     }
     render() {
         return (
             <div className="content-textArea">
                 <Tag color="#2db7f5" className="title">代码块</Tag>
-                <TextArea value={this.props.fileValue} className= "content-textArea-input"/>
+                <TextArea value={this.props.fileValue} onChange ={this.setState_} className= "content-textArea-input"/>
             </div>
 
 

@@ -57,7 +57,7 @@ class AHeader extends Component {
         var _this = this;
         // 关键字
 
-        Analyze.prototype.init(this.state.readFileValue)
+        Analyze.prototype.init(this.props.fileValue)
         let tokenList = [];
         let charList = [];
         let errorList = [];

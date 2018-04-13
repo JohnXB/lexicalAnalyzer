@@ -39,8 +39,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Header changeFileValue={this.changeFileValue.bind(this)} changeTokenList={this.changeTokenList.bind(this)} changeCharList={this.changeCharList.bind(this)} changeErrorList={this.changeErrorList.bind(this)}/>
-                <Content fileValue={this.state.fileValue} tokenList={this.state.tokenList} charList={this.state.charList} errorList={this.state.errorList}/>
+                <Header changeFileValue={this.changeFileValue.bind(this)} changeTokenList={this.changeTokenList.bind(this)} changeCharList={this.changeCharList.bind(this)} changeErrorList={this.changeErrorList.bind(this)} fileValue={this.state.fileValue}/>
+                <Content changeFileValue={this.changeFileValue.bind(this)} fileValue={this.state.fileValue} tokenList={this.state.tokenList} charList={this.state.charList} errorList={this.state.errorList}/>
             </div>
 
         )
