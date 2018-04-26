@@ -1,2 +1,2 @@
 # lexicalAnalyzer
-js做java的词法分析器
+react做c语言的词法分析器
